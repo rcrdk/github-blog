@@ -10,7 +10,7 @@ export function Blog() {
 			<FormFilter />
 
 			<PostsListContainer>
-				{Array.from({ length: 6 }).map((post, index) => (
+				{Array.from({ length: 6 }).map((_, index) => (
 					<PostItem key={index} />
 				))}
 			</PostsListContainer>
