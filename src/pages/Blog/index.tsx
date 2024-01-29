@@ -1,3 +1,19 @@
+import { FormFilter } from './components/FormFilter'
+import { PostItem } from './components/Post'
+import { UserCard } from './components/User'
+import { PostsListContainer } from './styles'
+
 export function Blog() {
-	return <h1>Blog / Home: {process.env.REACT_APP_GITHUB_USER}</h1>
+	return (
+		<>
+			<UserCard />
+			<FormFilter />
+
+			<PostsListContainer>
+				{Array.from({ length: 6 }).map((post, index) => (
+					<PostItem key={index} />
+				))}
+			</PostsListContainer>
+		</>
+	)
 }
