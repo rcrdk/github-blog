@@ -1,9 +1,10 @@
+import { Link } from 'react-router-dom'
 import { PostItemContainer } from './styles'
 
 export function PostItem() {
 	return (
 		<PostItemContainer>
-			<a href="#!">
+			<Link to={'/post/1'}>
 				<h2>JavaScript data types and data structures</h2>
 				<span>Há 1 dia</span>
 				<p>
@@ -12,7 +13,7 @@ export function PostItem() {
 					built-in data structures available in JavaScript and what properties
 					they have. These can be used to build other data structures.
 				</p>
-			</a>
+			</Link>
 		</PostItemContainer>
 	)
 }

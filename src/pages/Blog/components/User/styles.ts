@@ -46,6 +46,7 @@ export const UserCardContainer = styled.section`
 
 	> a {
 		grid-area: link;
+		margin-top: 0.35rem;
 		display: flex;
 		align-items: center;
 		color: ${(props) => props.theme.blue};

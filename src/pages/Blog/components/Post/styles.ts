@@ -28,9 +28,14 @@ export const PostItemContainer = styled.article`
 		white-space: nowrap;
 		color: ${(props) => props.theme['base-span']};
 		font-size: 0.875rem;
+		margin-top: 0.45rem;
 	}
 
 	p {
 		grid-column: 1 / span 2;
+		display: -webkit-box;
+		-webkit-line-clamp: 4;
+		-webkit-box-orient: vertical;
+		overflow: hidden;
 	}
 `
