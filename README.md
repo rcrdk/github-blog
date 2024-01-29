@@ -13,7 +13,9 @@ Projeto desenvolvido como desafio da formação React.JS do Ignite na Rocketseat
 - [React](https://reactjs.org)
 - [TypeScript](https://www.typescriptlang.org/)
 - [Figma](http://figma.com/)
-- (...)
+- [React Hook Form](https://react-hook-form.com/) + [Zod](https://zod.dev/)
+- [React Markdown](https://remarkjs.github.io/react-markdown/)
+- [Axios](https://axios-http.com/docs/intro) + [GitHub API](https://docs.github.com/en/rest?apiVersion=2022-11-28)
 
 ## 💻 Projeto
 
