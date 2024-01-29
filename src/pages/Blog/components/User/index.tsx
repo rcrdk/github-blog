@@ -7,43 +7,52 @@ import {
 	faBuilding,
 	faUserGroup,
 } from '@fortawesome/free-solid-svg-icons'
+import { useContextSelector } from 'use-context-selector'
+import { BlogContext } from '../../../../context/BlogContext'
+import { useEffect } from 'react'
 
 export function UserCard() {
+	const fetchUser = useContextSelector(BlogContext, (context) => {
+		return context.fetchUser
+	})
+
+	const user = useContextSelector(BlogContext, (context) => {
+		return context.user
+	})
+
+	useEffect(() => {
+		fetchUser()
+	}, [fetchUser])
+
 	return (
 		<UserCardContainer>
-			<img src="http://github.com/rcrdk.png" alt="" />
+			{user.avatar_url && <img src={user.avatar_url} alt="" />}
 
-			<h1>Cameron Williamson</h1>
+			<h1>{user.name}</h1>
 
-			<a
-				href="http://github.com/rcrdk"
-				target="_blank"
-				rel="noopener noreferrer"
-			>
+			<a href={user.html_url} target="_blank" rel="noopener noreferrer">
 				GitHub
 				<FontAwesomeIcon icon={faArrowUpRightFromSquare} />
 			</a>
 
-			<p>
-				Tristique volutpat pulvinar vel massa, pellentesque egestas. Eu viverra
-				massa quam dignissim aenean malesuada suscipit. Nunc, volutpat pulvinar
-				vel mass.
-			</p>
+			<p>{user.bio}</p>
 
 			<div>
 				<UserInfo>
 					<FontAwesomeIcon icon={faGithub} />
-					rcrdk
+					{user.login}
 				</UserInfo>
 
-				<UserInfo>
-					<FontAwesomeIcon icon={faBuilding} />
-					SmartMK
-				</UserInfo>
+				{user.company && (
+					<UserInfo>
+						<FontAwesomeIcon icon={faBuilding} />
+						{user.company}
+					</UserInfo>
+				)}
 
 				<UserInfo>
 					<FontAwesomeIcon icon={faUserGroup} />
-					16 seguidores
+					{user.followers === 1 ? `1 seguidor` : `${user.followers} seguidores`}
 				</UserInfo>
 			</div>
 		</UserCardContainer>
