@@ -21,13 +21,6 @@ export const UserCardContainer = styled.section`
 		grid-template-areas: 'avatar .' 'avatar title' 'avatar link' 'avatar .' 'description description' 'infos infos';
 	}
 
-	> img {
-		grid-area: avatar;
-		display: block;
-		max-width: 100%;
-		border-radius: 0.625rem;
-	}
-
 	> h1 {
 		grid-area: title;
 
@@ -40,7 +33,7 @@ export const UserCardContainer = styled.section`
 		grid-area: description;
 
 		@media (max-width: 575px) {
-			padding-top: 1rem;
+			margin-top: 1rem;
 		}
 	}
 
@@ -63,14 +56,50 @@ export const UserCardContainer = styled.section`
 			color: ${(props) => props.theme['base-text']};
 		}
 	}
+`
 
-	> div {
-		grid-area: infos;
-		padding-top: 1rem;
-		display: flex;
-		align-items: center;
-		flex-wrap: wrap;
-		gap: 0.5rem 1.5rem;
+export const UserAvatar = styled.div`
+	grid-area: avatar;
+	position: relative;
+	border-radius: 0.625rem;
+	overflow: hidden;
+	aspect-ratio: 1;
+	background: ${(props) => props.theme['base-post']};
+
+	> img {
+		position: absolute;
+		inset: 0;
+		width: 100%;
+		height: 100%;
+		display: block;
+		object-fit: cover;
+		object-position: center;
+	}
+
+	svg {
+		position: absolute;
+		inset: 25%;
+		width: 50%;
+		height: 50%;
+		color: ${(props) => props.theme['base-label']};
+	}
+
+	.skeleton {
+		position: absolute;
+		inset: 0;
+	}
+`
+
+export const UserInfoGroup = styled.div`
+	grid-area: infos;
+	padding-top: 1rem;
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+	gap: 0.5rem 1.5rem;
+
+	&:has(.skeleton) {
+		gap: 0.5rem;
 	}
 `
 

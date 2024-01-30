@@ -20,6 +20,7 @@ export const HeaderContainer = styled.header`
 	img {
 		display: block;
 		width: 9rem;
+		aspect-ratio: 146 / 79;
 	}
 `
 

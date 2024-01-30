@@ -6,7 +6,6 @@ import { BlogContext } from '../../../../context/BlogContext'
 import { useForm } from 'react-hook-form'
 import * as z from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircleNotch } from '@fortawesome/free-solid-svg-icons'
 
@@ -17,30 +16,22 @@ const searchFormSchema = z.object({
 type SearchFormInputs = z.infer<typeof searchFormSchema>
 
 export function FormFilter() {
-	const [loadingPosts, setLoadingPosts] = useState(false)
-
-	const { totalPosts, fetchPosts, onResetPagination } = useContextSelector(
-		BlogContext,
-		(context) => {
+	const { totalPosts, fetchPosts, onResetPagination, loadingPosts } =
+		useContextSelector(BlogContext, (context) => {
 			return {
 				totalPosts: context.totalPosts,
 				fetchPosts: context.fetchPosts,
 				onResetPagination: context.onResetPagination,
+				loadingPosts: context.loadingPosts,
 			}
-		},
-	)
+		})
 
 	const { register, handleSubmit } = useForm<SearchFormInputs>({
 		resolver: zodResolver(searchFormSchema),
 	})
 
 	async function handleSearchPosts(data: SearchFormInputs) {
-		setLoadingPosts(true)
-
-		await fetchPosts(data.query, 1).finally(() => {
-			setTimeout(() => setLoadingPosts(false), 1000)
-		})
-
+		await fetchPosts(data.query, 1)
 		onResetPagination()
 	}
 

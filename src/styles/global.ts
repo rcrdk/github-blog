@@ -100,4 +100,27 @@ export const GlobalStyle = createGlobalStyle`
 			}
 		}
 	}
+
+	.skeleton {
+		color: transparent !important;
+		background: ${(props) => props.theme['base-border']} !important;
+		border-radius: 0.375rem;
+		animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+		border-color: transparent;
+		pointer-events: none;
+		user-select: none;
+
+		@media print {
+			display: none !important;
+		}
+
+		* {
+			opacity: 0 !important;
+		}
+	}
+
+	@keyframes pulse {
+		0%, 100% { opacity: 1; }
+		50% { opacity: .5; }
+	}
 `

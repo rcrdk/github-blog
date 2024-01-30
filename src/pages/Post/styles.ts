@@ -58,6 +58,10 @@ export const PostHeaderInfos = styled.ul`
 	flex-wrap: wrap;
 	gap: 0.5rem 1.5rem;
 
+	&:has(.skeleton) {
+		gap: 0.5rem;
+	}
+
 	li {
 		display: flex;
 		align-items: center;
@@ -77,6 +81,14 @@ export const PostBodyContainer = styled.section`
 
 	@media (max-width: 575px) {
 		padding: 2rem 0 0;
+	}
+
+	.skeleton {
+		line-height: 1;
+
+		&:not(:first-child) {
+			margin-top: 0.75rem;
+		}
 	}
 `
 

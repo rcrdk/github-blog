@@ -15,6 +15,7 @@ interface BlogContextType {
 	allowLoadMore: boolean
 	resetPagination: number
 	onResetPagination: () => void
+	loadingPosts: boolean
 }
 
 interface BlogProviderProps {
@@ -29,6 +30,7 @@ export function BlogProvider({ children }: BlogProviderProps) {
 	const [totalPosts, setTotalPosts] = useState(0)
 	const [allowLoadMore, setAllowLoadMore] = useState(false)
 	const [resetPagination, setResetPagination] = useState(0)
+	const [loadingPosts, setLoadingPosts] = useState(true)
 
 	const fetchUser = useCallback(async () => {
 		const response = await API.get(
@@ -39,6 +41,8 @@ export function BlogProvider({ children }: BlogProviderProps) {
 	}, [])
 
 	const fetchPosts = useCallback(async (query?: string, page?: number) => {
+		setLoadingPosts(true)
+
 		await API.get('/search/issues', {
 			params: {
 				q: `${query || ''} repo:${process.env.REACT_APP_GITHUB_USER}/${process.env.REACT_APP_GITHUB_REPO}`,
@@ -69,6 +73,7 @@ export function BlogProvider({ children }: BlogProviderProps) {
 					icon: '☠️',
 				})
 			})
+			.finally(() => setLoadingPosts(false))
 	}, [])
 
 	const fetchPost = useCallback(async (id: number | string) => {
@@ -95,6 +100,7 @@ export function BlogProvider({ children }: BlogProviderProps) {
 				allowLoadMore,
 				resetPagination,
 				onResetPagination,
+				loadingPosts,
 			}}
 		>
 			{children}

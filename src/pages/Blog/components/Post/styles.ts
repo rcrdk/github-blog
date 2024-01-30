@@ -18,6 +18,11 @@ export const PostItemContainer = styled.article`
 			border 200ms ease,
 			box-shadow 200ms ease;
 
+		&:has(.skeleton) {
+			cursor: default;
+			pointer-events: none;
+		}
+
 		&:hover {
 			border-color: ${(props) => props.theme['base-border']};
 		}
@@ -37,5 +42,9 @@ export const PostItemContainer = styled.article`
 		-webkit-line-clamp: 4;
 		-webkit-box-orient: vertical;
 		overflow: hidden;
+
+		&.skeleton {
+			line-height: 1;
+		}
 	}
 `

@@ -36,6 +36,7 @@ import toast from 'react-hot-toast'
 
 export function PostPage() {
 	const [post, setPost] = useState({} as Post)
+	const [loading, setLoading] = useState(true)
 
 	const { id } = useParams()
 	const navigate = useNavigate()
@@ -45,9 +46,14 @@ export function PostPage() {
 	})
 
 	useEffect(() => {
+		setLoading(true)
+
 		if (id) {
 			fetchPost(id)
-				.then((res) => setPost(res))
+				.then((res) => {
+					setPost(res)
+					setLoading(false)
+				})
 				.catch((err) => {
 					console.error('ERR::', err.message)
 					navigate('/404')
@@ -60,16 +66,42 @@ export function PostPage() {
 		}
 	}, [id, fetchPost, navigate])
 
-	return (
-		<PostContainer>
-			<PostHeaderContainer>
+	function renderPostHeader() {
+		if (loading || !post) {
+			return (
+				<>
+					<PostHeaderBackButton to="/" className="skeleton" tabIndex={-1}>
+						Carregando...
+					</PostHeaderBackButton>
+					<div />
+					<PostHeaderGitHubButton href="#!" className="skeleton">
+						Carregando...
+					</PostHeaderGitHubButton>
+
+					<h1 className="skeleton">Carregando...</h1>
+
+					<PostHeaderInfos>
+						<li>
+							<span className="skeleton">Carregando...</span>
+						</li>
+						<li>
+							<span className="skeleton">Carregando...</span>
+						</li>
+						<li>
+							<span className="skeleton">Carregando...</span>
+						</li>
+					</PostHeaderInfos>
+				</>
+			)
+		}
+
+		return (
+			<>
 				<PostHeaderBackButton to="/">
 					<FontAwesomeIcon icon={faChevronLeft} />
 					Voltar
 				</PostHeaderBackButton>
-
 				<div />
-
 				<PostHeaderGitHubButton
 					href={post.html_url}
 					target="_blank"
@@ -114,38 +146,60 @@ export function PostPage() {
 						</span>
 					</li>
 				</PostHeaderInfos>
-			</PostHeaderContainer>
+			</>
+		)
+	}
 
-			<PostBodyContainer>
-				<PostMarkdown
-					rehypePlugins={[rehypeRaw]}
-					remarkPlugins={[remarkGfm]}
-					components={{
-						h3: 'h2',
-						// eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-explicit-any
-						code({ node, inline, className, children, ...props }: any) {
-							const match = /language-(\w+)/.exec(className || '')
-
-							return !inline && match ? (
-								<SyntaxHighlighter
-									style={materialDark}
-									PreTag="div"
-									language={match[1]}
-									{...props}
-								>
-									{String(children).replace(/\n$/, '')}
-								</SyntaxHighlighter>
-							) : (
-								<code className={className} {...props}>
-									{children}
-								</code>
-							)
-						},
+	function renderPostBody() {
+		if (loading || !post) {
+			return Array.from({ length: 32 }).map((_, index) => (
+				<p
+					className="skeleton"
+					style={{
+						width: Math.floor(Math.random() * (100 - 50 + 1) + 50) + '%',
 					}}
+					key={index}
 				>
-					{post.body}
-				</PostMarkdown>
-			</PostBodyContainer>
+					Carregando...
+				</p>
+			))
+		}
+		return (
+			<PostMarkdown
+				rehypePlugins={[rehypeRaw]}
+				remarkPlugins={[remarkGfm]}
+				components={{
+					h3: 'h2',
+					// eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-explicit-any
+					code({ node, inline, className, children, ...props }: any) {
+						const match = /language-(\w+)/.exec(className || '')
+
+						return !inline && match ? (
+							<SyntaxHighlighter
+								style={materialDark}
+								PreTag="div"
+								language={match[1]}
+								{...props}
+							>
+								{String(children).replace(/\n$/, '')}
+							</SyntaxHighlighter>
+						) : (
+							<code className={className} {...props}>
+								{children}
+							</code>
+						)
+					},
+				}}
+			>
+				{post.body}
+			</PostMarkdown>
+		)
+	}
+
+	return (
+		<PostContainer>
+			<PostHeaderContainer>{renderPostHeader()}</PostHeaderContainer>
+			<PostBodyContainer>{renderPostBody()}</PostBodyContainer>
 		</PostContainer>
 	)
 }
