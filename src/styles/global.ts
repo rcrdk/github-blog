@@ -39,7 +39,7 @@ export const GlobalStyle = createGlobalStyle`
 		border: 1px solid ${(props) => props.theme['base-border']};
 		border-radius: 0.625rem;
 		box-shadow: none !important;
-		transition: border 200ms ease;
+		transition: opacity 200ms ease, 200ms ease;
 		
 		&::placeholder {
 			color: ${(props) => props.theme['base-label']};
@@ -47,6 +47,11 @@ export const GlobalStyle = createGlobalStyle`
 
 		&:focus {
 			border-color: ${(props) => props.theme.blue};
+		}
+
+		&:disabled {
+			opacity: .66;
+			cursor: wait;
 		}
 	}
 
@@ -79,6 +84,20 @@ export const GlobalStyle = createGlobalStyle`
 		
 		@media (max-width: 575px) {
 			font-size: 1rem;
+		}
+	}
+
+	.toast {
+		gap: 1rem;
+
+		> div {
+			margin: 0 !important;
+			white-space: normal !important;
+			text-wrap: balance !important;
+
+			&:first-child {
+				font-size: 1.5em !important;
+			}
 		}
 	}
 `

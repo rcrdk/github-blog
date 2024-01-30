@@ -15,17 +15,21 @@
 		"@fortawesome/free-regular-svg-icons": "^6.5.1",
 		"@fortawesome/free-solid-svg-icons": "^6.5.1",
 		"@fortawesome/react-fontawesome": "^0.2.0",
+		"@hookform/resolvers": "^3.3.4",
 		"axios": "^1.6.7",
 		"date-fns": "^3.3.1",
 		"react": "^18.2.0",
 		"react-dom": "^18.2.0",
+		"react-hook-form": "^7.49.3",
+		"react-hot-toast": "^2.4.1",
 		"react-markdown": "^9.0.1",
 		"react-router-dom": "^6.21.3",
 		"react-syntax-highlighter": "^15.5.0",
 		"rehype-raw": "^7.0.0",
 		"remark-gfm": "^4.0.0",
 		"styled-components": "^6.1.8",
-		"use-context-selector": "^1.4.1"
+		"use-context-selector": "^1.4.1",
+		"zod": "^3.22.4"
 	},
 	"devDependencies": {
 		"@rocketseat/eslint-config": "^2.1.0",

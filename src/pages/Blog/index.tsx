@@ -2,25 +2,41 @@ import { useEffect, useState } from 'react'
 import { FormFilter } from './components/FormFilter'
 import { PostItem } from './components/Post'
 import { UserCard } from './components/User'
-import { PostsListContainer } from './styles'
+import { PostsEmpty, PostsListContainer, PostsPagination } from './styles'
 import { useContextSelector } from 'use-context-selector'
 import { BlogContext } from '../../context/BlogContext'
-import { Post } from '../../dtos/post'
 
 export function Blog() {
-	const [posts, setPosts] = useState<Post[]>([])
+	const [nextPage, setNextPage] = useState(2)
+	const [loadingNextPage, setLoadingNextPage] = useState(false)
 
-	const fetchPosts = useContextSelector(BlogContext, (context) => {
-		return context.fetchPosts
-	})
+	const { posts, fetchPosts, allowLoadMore, resetPagination } =
+		useContextSelector(BlogContext, (context) => {
+			return {
+				posts: context.posts,
+				fetchPosts: context.fetchPosts,
+				allowLoadMore: context.allowLoadMore,
+				resetPagination: context.resetPagination,
+			}
+		})
+
+	async function handleLoadMorePosts() {
+		setLoadingNextPage(true)
+
+		await fetchPosts('', nextPage).finally(() => {
+			setLoadingNextPage(false)
+		})
+
+		setNextPage((prev) => prev + 1)
+	}
 
 	useEffect(() => {
-		fetchPosts()
-			.then((res) => setPosts(res))
-			.catch((err) => {
-				console.log('ERR:: ', err)
-			})
+		fetchPosts('', 1)
 	}, [fetchPosts])
+
+	useEffect(() => {
+		setNextPage(2)
+	}, [resetPagination])
 
 	return (
 		<>
@@ -28,10 +44,23 @@ export function Blog() {
 			<FormFilter />
 
 			<PostsListContainer>
-				{posts.map((item) => (
-					<PostItem data={item} key={item.number} />
-				))}
+				{posts &&
+					posts.map((item) => <PostItem data={item} key={item.number} />)}
+
+				{posts.length === 0 && (
+					<PostsEmpty>Nenhuma publicação encontrada.</PostsEmpty>
+				)}
 			</PostsListContainer>
+
+			{allowLoadMore && (
+				<PostsPagination
+					type="button"
+					onClick={handleLoadMorePosts}
+					disabled={loadingNextPage}
+				>
+					Carregar mais publicações
+				</PostsPagination>
+			)}
 		</>
 	)
 }

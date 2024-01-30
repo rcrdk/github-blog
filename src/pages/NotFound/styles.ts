@@ -29,7 +29,7 @@ export const NotFoundButton = styled(Link)`
 		background 200ms ease,
 		box-shadow 200ms ease;
 
-	&:hover {
+	&:not(:disabled):hover {
 		background: ${(props) => props.theme['blue-hover']};
 	}
 `

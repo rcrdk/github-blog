@@ -32,6 +32,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons'
 import { format, formatDistanceToNowStrict } from 'date-fns'
 import { ptBR } from 'date-fns/locale'
+import toast from 'react-hot-toast'
 
 export function PostPage() {
 	const [post, setPost] = useState({} as Post)
@@ -48,8 +49,11 @@ export function PostPage() {
 			fetchPost(id)
 				.then((res) => setPost(res))
 				.catch((err) => {
-					console.log('ERR:: ', err)
+					console.error('ERR::', err.message)
 					navigate('/404')
+					toast('Erro ao carregar publicação. Verifique o console.', {
+						icon: '🤡',
+					})
 				})
 		} else {
 			navigate('/404')

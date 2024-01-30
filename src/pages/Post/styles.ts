@@ -76,7 +76,7 @@ export const PostBodyContainer = styled.section`
 	padding: 2.5rem 2rem 0;
 
 	@media (max-width: 575px) {
-		padding: 2rem 1.5rem 0;
+		padding: 2rem 0 0;
 	}
 `
 
@@ -87,9 +87,15 @@ export const PostMarkdown = styled(Markdown)`
 
 	ul,
 	ol {
-		padding-left: 1.5rem;
+		/* padding-left: 1.5rem; */
+
+		li {
+			position: relative;
+			margin-left: 1rem;
+		}
 
 		li:has(input) {
+			margin-left: 0;
 			list-style: none;
 		}
 	}
@@ -108,6 +114,11 @@ export const PostMarkdown = styled(Markdown)`
 		}
 	}
 
+	code {
+		color: currentColor !important;
+		background: ${(props) => props.theme['base-post']} !important;
+	}
+
 	pre > div {
 		padding: 1rem !important;
 		margin: 0 !important;
@@ -120,7 +131,43 @@ export const PostMarkdown = styled(Markdown)`
 	}
 
 	input {
+		padding: 0;
 		width: auto;
 		accent-color: ${(props) => props.theme.blue} !important;
+	}
+
+	summary {
+		font-weight: bold;
+		cursor: pointer;
+	}
+
+	hr {
+		margin: 1.25rem 0;
+		border: none;
+		border-top: 1px solid ${(props) => props.theme['base-border']};
+	}
+
+	table {
+		border: 1px solid ${(props) => props.theme['base-border']};
+		border-spacing: 0;
+
+		td,
+		th {
+			padding: 0.25rem 1rem 0.25rem 0.5rem;
+			border-bottom: 1px solid ${(props) => props.theme['base-border']};
+		}
+
+		td + td,
+		th + th {
+			border-left: 1px solid ${(props) => props.theme['base-border']};
+		}
+
+		tr {
+			&:last-child {
+				td {
+					border-bottom: 0;
+				}
+			}
+		}
 	}
 `

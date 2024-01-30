@@ -10,19 +10,28 @@ import {
 import { useContextSelector } from 'use-context-selector'
 import { BlogContext } from '../../../../context/BlogContext'
 import { useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
+import toast from 'react-hot-toast'
 
 export function UserCard() {
-	const fetchUser = useContextSelector(BlogContext, (context) => {
-		return context.fetchUser
-	})
+	const navigate = useNavigate()
 
-	const user = useContextSelector(BlogContext, (context) => {
-		return context.user
+	const { fetchUser, user } = useContextSelector(BlogContext, (context) => {
+		return {
+			fetchUser: context.fetchUser,
+			user: context.user,
+		}
 	})
 
 	useEffect(() => {
-		fetchUser()
-	}, [fetchUser])
+		fetchUser().catch((err) => {
+			console.error('ERR::', err.message)
+			navigate('/404')
+			toast('Erro ao carregar usuário. Verifique o console.', {
+				icon: '💩',
+			})
+		})
+	}, [fetchUser, navigate])
 
 	return (
 		<UserCardContainer>
