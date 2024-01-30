@@ -72,11 +72,11 @@ const HeaderBgLines = styled.div`
 export const HeaderBgLineLeft = styled(HeaderBgLines)`
 	inset: 0 auto 1rem 0;
 	background: url(${bgLinesLeft}) right bottom no-repeat;
-	width: 21.35vw;
+	width: 21vw;
 `
 
 export const HeaderBgLineRight = styled(HeaderBgLines)`
-	width: 19.32vw;
 	inset: 0 0 1rem auto;
 	background: url(${bgLinesRight}) left bottom no-repeat;
+	width: 19vw;
 `
