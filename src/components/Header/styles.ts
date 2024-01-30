@@ -1,7 +1,6 @@
 import styled from 'styled-components'
 
-// import bgLinesLeft from '../../assets/header-left.svg'
-import bgLinesRight from '../../assets/header-right.svg'
+import bgLines from '../../assets/header-lines.svg'
 
 export const HeaderContainer = styled.header`
 	position: relative;
@@ -29,6 +28,7 @@ const HeaderBg = styled.div`
 	position: absolute;
 	z-index: -1;
 	background: ${(props) => props.theme['base-blur']};
+	pointer-events: none;
 `
 
 export const HeaderBgCard = styled(HeaderBg)`
@@ -63,20 +63,21 @@ export const HeaderBgCircleRight = styled(HeaderBg)`
 	filter: blur(368px);
 `
 
-export const HeaderBgLineRight = styled.div`
+const HeaderBgLines = styled.div`
 	position: absolute;
 	z-index: -1;
 	background-size: auto 100% !important;
-	inset: 0 0 1rem auto;
-	background: url(${bgLinesRight}) left bottom no-repeat;
-	width: 19vw;
+	background: url(${bgLines}) right bottom no-repeat;
+	width: 21vw;
+	pointer-events: none;
 `
 
-export const HeaderBgLineLeft = styled.div`
-	position: absolute;
-	z-index: -1;
-	background-size: auto 100% !important;
+export const HeaderBgLineRight = styled(HeaderBgLines)`
+	inset: 0 0 1rem auto;
+`
+
+export const HeaderBgLineLeft = styled(HeaderBgLines)`
 	inset: 0 auto 1rem 0;
-	background: url(${bgLinesRight}) right bottom no-repeat;
-	width: 21vw;
+	background-position: left bottom;
+	transform: rotateX(180deg) rotateY(180deg);
 `
