@@ -19,7 +19,7 @@ export function App() {
 			<Toaster
 				toastOptions={{
 					position: 'bottom-center',
-					duration: 30000,
+					duration: 3000,
 					className: 'toast',
 					style: {
 						padding: '1rem 1.5rem',

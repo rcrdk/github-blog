@@ -65,7 +65,7 @@ export function BlogProvider({ children }: BlogProviderProps) {
 			})
 			.catch((err) => {
 				console.error('ERR::', err.message)
-				toast('Erro ao carregar publicações. Verifique o console.', {
+				toast('Erro ao carregar publicações. Verifique o log no console.', {
 					icon: '☠️',
 				})
 			})

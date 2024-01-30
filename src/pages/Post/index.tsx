@@ -51,7 +51,7 @@ export function PostPage() {
 				.catch((err) => {
 					console.error('ERR::', err.message)
 					navigate('/404')
-					toast('Erro ao carregar publicação. Verifique o console.', {
+					toast('Erro ao carregar publicação. Verifique o log no console.', {
 						icon: '🤡',
 					})
 				})

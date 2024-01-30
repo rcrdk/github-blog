@@ -27,7 +27,7 @@ export function UserCard() {
 		fetchUser().catch((err) => {
 			console.error('ERR::', err.message)
 			navigate('/404')
-			toast('Erro ao carregar usuário. Verifique o console.', {
+			toast('Erro ao carregar usuário. Verifique o log no console.', {
 				icon: '💩',
 			})
 		})

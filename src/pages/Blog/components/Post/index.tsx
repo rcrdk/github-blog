@@ -3,12 +3,13 @@ import { PostItemContainer } from './styles'
 import { Post } from '../../../../dtos/post'
 import { format, formatDistanceToNowStrict } from 'date-fns'
 import { ptBR } from 'date-fns/locale'
+import { memo } from 'react'
 
 interface PostItemProps {
 	data: Post
 }
 
-export function PostItem({ data }: PostItemProps) {
+function PostItemComponent({ data }: PostItemProps) {
 	return (
 		<PostItemContainer>
 			<Link to={`/post/${data.number}`}>
@@ -30,3 +31,5 @@ export function PostItem({ data }: PostItemProps) {
 		</PostItemContainer>
 	)
 }
+
+export const PostItem = memo(PostItemComponent)
