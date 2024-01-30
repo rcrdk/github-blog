@@ -16,6 +16,8 @@ interface BlogContextType {
 	resetPagination: number
 	onResetPagination: () => void
 	loadingPosts: boolean
+	onChangeSearch: (status: boolean) => void
+	changedSearch: boolean
 }
 
 interface BlogProviderProps {
@@ -30,6 +32,7 @@ export function BlogProvider({ children }: BlogProviderProps) {
 	const [totalPosts, setTotalPosts] = useState(0)
 	const [allowLoadMore, setAllowLoadMore] = useState(false)
 	const [resetPagination, setResetPagination] = useState(0)
+	const [changedSearch, setChangedSearch] = useState(false)
 	const [loadingPosts, setLoadingPosts] = useState(true)
 
 	const fetchUser = useCallback(async () => {
@@ -73,7 +76,10 @@ export function BlogProvider({ children }: BlogProviderProps) {
 					icon: '☠️',
 				})
 			})
-			.finally(() => setLoadingPosts(false))
+			.finally(() => {
+				setLoadingPosts(false)
+				setChangedSearch(false)
+			})
 	}, [])
 
 	const fetchPost = useCallback(async (id: number | string) => {
@@ -86,6 +92,10 @@ export function BlogProvider({ children }: BlogProviderProps) {
 
 	const onResetPagination = useCallback(() => {
 		setResetPagination((prev) => prev + 1)
+	}, [])
+
+	const onChangeSearch = useCallback((status: boolean) => {
+		setChangedSearch(status)
 	}, [])
 
 	return (
@@ -101,6 +111,8 @@ export function BlogProvider({ children }: BlogProviderProps) {
 				resetPagination,
 				onResetPagination,
 				loadingPosts,
+				onChangeSearch,
+				changedSearch,
 			}}
 		>
 			{children}

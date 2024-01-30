@@ -41,6 +41,7 @@ export const PostsPagination = styled.button`
 `
 
 export const PostsEmpty = styled.div`
+	order: 1;
 	grid-column: span 2;
 	padding: 1.5rem;
 	border-radius: 0.375rem;

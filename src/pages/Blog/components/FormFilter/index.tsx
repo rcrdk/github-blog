@@ -16,21 +16,28 @@ const searchFormSchema = z.object({
 type SearchFormInputs = z.infer<typeof searchFormSchema>
 
 export function FormFilter() {
-	const { totalPosts, fetchPosts, onResetPagination, loadingPosts } =
-		useContextSelector(BlogContext, (context) => {
-			return {
-				totalPosts: context.totalPosts,
-				fetchPosts: context.fetchPosts,
-				onResetPagination: context.onResetPagination,
-				loadingPosts: context.loadingPosts,
-			}
-		})
+	const {
+		totalPosts,
+		fetchPosts,
+		onResetPagination,
+		loadingPosts,
+		onChangeSearch,
+	} = useContextSelector(BlogContext, (context) => {
+		return {
+			totalPosts: context.totalPosts,
+			fetchPosts: context.fetchPosts,
+			onResetPagination: context.onResetPagination,
+			loadingPosts: context.loadingPosts,
+			onChangeSearch: context.onChangeSearch,
+		}
+	})
 
 	const { register, handleSubmit } = useForm<SearchFormInputs>({
 		resolver: zodResolver(searchFormSchema),
 	})
 
 	async function handleSearchPosts(data: SearchFormInputs) {
+		onChangeSearch(true)
 		await fetchPosts(data.query, 1)
 		onResetPagination()
 	}

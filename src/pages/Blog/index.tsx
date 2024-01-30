@@ -10,16 +10,23 @@ export function Blog() {
 	const [nextPage, setNextPage] = useState(2)
 	const [loadingNextPage, setLoadingNextPage] = useState(false)
 
-	const { posts, fetchPosts, allowLoadMore, resetPagination, loadingPosts } =
-		useContextSelector(BlogContext, (context) => {
-			return {
-				posts: context.posts,
-				fetchPosts: context.fetchPosts,
-				allowLoadMore: context.allowLoadMore,
-				resetPagination: context.resetPagination,
-				loadingPosts: context.loadingPosts,
-			}
-		})
+	const {
+		posts,
+		fetchPosts,
+		allowLoadMore,
+		resetPagination,
+		loadingPosts,
+		changeSearch,
+	} = useContextSelector(BlogContext, (context) => {
+		return {
+			posts: context.posts,
+			fetchPosts: context.fetchPosts,
+			allowLoadMore: context.allowLoadMore,
+			resetPagination: context.resetPagination,
+			loadingPosts: context.loadingPosts,
+			changeSearch: context.changedSearch,
+		}
+	})
 
 	async function handleLoadMorePosts() {
 		setLoadingNextPage(true)
@@ -40,26 +47,41 @@ export function Blog() {
 	}, [resetPagination])
 
 	function renderPosts() {
-		if (posts.length === 0 && loadingPosts) {
+		if (
+			(loadingPosts && posts.length === 0) ||
+			(loadingPosts && changeSearch)
+		) {
 			return Array.from({ length: 6 }).map((_, index) => (
 				<PostItem data="skeleton" key={index} />
 			))
 		}
 
-		if (posts.length === 0) {
+		if (posts.length === 0 && !loadingPosts) {
 			return <PostsEmpty>Nenhuma publicação encontrada.</PostsEmpty>
 		}
 
-		return posts.map((item) => <PostItem data={item} key={item.number} />)
+		return (
+			<>
+				{posts.map((item) => (
+					<PostItem data={item} key={item.number} />
+				))}
+
+				{loadingPosts &&
+					posts.length > 0 &&
+					Array.from({ length: 6 }).map((_, index) => (
+						<PostItem data="skeleton" key={index} />
+					))}
+			</>
+		)
 	}
 
-	function renderLoadingPagination() {
-		if (!loadingPosts) return <></>
+	// function renderLoadingPagination() {
+	// 	if (!loadingPosts) return <></>
 
-		return Array.from({ length: 6 }).map((_, index) => (
-			<PostItem data="skeleton" key={index} />
-		))
-	}
+	// 	return Array.from({ length: 6 }).map((_, index) => (
+	// 		<PostItem data="skeleton" key={index} />
+	// 	))
+	// }
 
 	return (
 		<>
@@ -68,7 +90,7 @@ export function Blog() {
 
 			<PostsListContainer>
 				{renderPosts()}
-				{renderLoadingPagination()}
+				{/* {renderLoadingPagination()} */}
 			</PostsListContainer>
 
 			{allowLoadMore && (
