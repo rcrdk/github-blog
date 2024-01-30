@@ -77,6 +77,6 @@ export const HeaderBgLineLeft = styled.div`
 	z-index: -1;
 	background-size: auto 100% !important;
 	inset: 0 auto 1rem 0;
-	background: url(${bgLinesLeft}) right bottom no-repeat;
+	/* background: url(${bgLinesLeft}) right bottom no-repeat; */
 	width: 21vw;
 `
