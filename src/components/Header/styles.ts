@@ -1,7 +1,9 @@
 import styled from 'styled-components'
 
+// eslint-disable-next-line import/no-duplicates
 import bgLinesLeft from '../../assets/header-left.svg'
-import bgLinesRight from '../../assets/header-right.svg'
+// eslint-disable-next-line import/no-duplicates
+import bgLinesRight from '../../assets/header-left.svg'
 
 export const HeaderContainer = styled.header`
 	position: relative;
