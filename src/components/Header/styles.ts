@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-import bgLinesLeft from '../../assets/header-left.svg'
+// import bgLinesLeft from '../../assets/header-left.svg'
 import bgLinesRight from '../../assets/header-right.svg'
 
 export const HeaderContainer = styled.header`
