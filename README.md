@@ -3,10 +3,9 @@ Projeto desenvolvido como desafio da formação React.JS do Ignite na Rocketseat
 
 <br>
 
-<!-- <p align="center">
-  <img alt="To-Do List Project Preview" src="https://github.com/rcrdk/ignite-challenge-todo-list/blob/main/public/preview.jpeg?raw=true" width="100%" />
-</p> -->
-(imagem ...)
+<p align="center">
+  <img alt="To-Do List Project Preview" src="https://github.com/rcrdk/ignite-challenge-github-blog/blob/main/public/preview.jpeg?raw=true" width="100%" />
+</p>
 
 ## 🚀 Tecnologias utilizadas
 
