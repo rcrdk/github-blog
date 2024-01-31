@@ -1,5 +1,5 @@
 # 📝 GitHub Blog
-I developed this project as a challenge of my latest studies of React lessons on [Rocketseat](https://www.rocketseat.com.br).
+I developed this project as a challenge of my latest studies on React lessons at [Rocketseat](https://www.rocketseat.com.br).
 
 <br>
 
@@ -21,7 +21,7 @@ I developed this project as a challenge of my latest studies of React lessons on
 
 ## 💻 Project
 
-This project was develped based on a Figma design provied by the school. The main practice was fetching data using GitHub API with Axios and improve app performance with useCallback, useMemo and memo. Also, I used Context API to access functions and variables across components and implemented use-context-selector packacge for better performance. I took some liberties and challenge myself to implement a loading state on components, a pagination at home page and setup React Markdown to convert markdown to HTML.
+This project was developed based on a Figma design provied by the school. The main practice was fetching data from GitHub API using Axios and improve app performance with useCallback, useMemo and memo. Also, I used Context API to access functions and variables across components and implemented use-context-selector package for better performance. I took some liberties and challenge myself to implement a loading and empty states on components, a pagination at home page and setup React Markdown to convert markdown to HTML.
 
 **It includes:** A home page containing user card and posts list with pagination and filter by query string; A post page with post contents; A fallback page for general errors such as 404.
 
