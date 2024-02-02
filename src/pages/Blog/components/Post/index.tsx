@@ -1,9 +1,10 @@
-import { Link } from 'react-router-dom'
-import { PostItemContainer } from './styles'
-import { Post } from '../../../../dtos/post'
 import { format, formatDistanceToNowStrict } from 'date-fns'
 import { ptBR } from 'date-fns/locale'
 import { memo } from 'react'
+import { Link } from 'react-router-dom'
+
+import { Post } from '../../../../dtos/post'
+import { PostItemContainer } from './styles'
 
 interface PostItemProps {
 	data: Post | 'skeleton'

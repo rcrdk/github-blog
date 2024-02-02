@@ -1,16 +1,16 @@
-import { defineConfig, loadEnv } from 'vite'
+import path from 'node:path'
+
 import react from '@vitejs/plugin-react'
+import { defineConfig } from 'vite'
 
-export default defineConfig(({ mode }) => {
-	const env = loadEnv(mode, process.cwd(), '')
-
-	return {
-		define: {
-			'process.env': env,
+export default defineConfig({
+	plugins: [react()],
+	server: {
+		port: 3000,
+	},
+	resolve: {
+		alias: {
+			'@': path.resolve(__dirname, './src'),
 		},
-		plugins: [react()],
-		server: {
-			port: 3000,
-		},
-	}
+	},
 })

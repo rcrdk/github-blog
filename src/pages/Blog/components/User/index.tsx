@@ -1,11 +1,3 @@
-import {
-	UserAvatar,
-	UserCardContainer,
-	UserInfo,
-	UserInfoGroup,
-} from './styles'
-
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGithub } from '@fortawesome/free-brands-svg-icons'
 import {
 	faArrowUpRightFromSquare,
@@ -13,11 +5,19 @@ import {
 	faUser,
 	faUserGroup,
 } from '@fortawesome/free-solid-svg-icons'
-import { useContextSelector } from 'use-context-selector'
-import { BlogContext } from '../../../../context/BlogContext'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { memo, useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
 import toast from 'react-hot-toast'
+import { useNavigate } from 'react-router-dom'
+import { useContextSelector } from 'use-context-selector'
+
+import { BlogContext } from '../../../../context/BlogContext'
+import {
+	UserAvatar,
+	UserCardContainer,
+	UserInfo,
+	UserInfoGroup,
+} from './styles'
 
 function UserCardComponent() {
 	const navigate = useNavigate()

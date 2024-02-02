@@ -1,7 +1,24 @@
-import { Post } from '../../dtos/post'
-
+import { faGithub } from '@fortawesome/free-brands-svg-icons'
+import {
+	faArrowUpRightFromSquare,
+	faCalendar,
+	faChevronLeft,
+	faComment,
+} from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { format, formatDistanceToNowStrict } from 'date-fns'
+import { ptBR } from 'date-fns/locale'
 import { useEffect, useState } from 'react'
+import toast from 'react-hot-toast'
+import { useNavigate, useParams } from 'react-router-dom'
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
+import { materialDark } from 'react-syntax-highlighter/dist/esm/styles/prism'
+import rehypeRaw from 'rehype-raw'
+import remarkGfm from 'remark-gfm'
+import { useContextSelector } from 'use-context-selector'
 
+import { BlogContext } from '../../context/BlogContext'
+import { Post } from '../../dtos/post'
 import {
 	PostBodyContainer,
 	PostContainer,
@@ -11,28 +28,6 @@ import {
 	PostHeaderInfos,
 	PostMarkdown,
 } from './styles'
-
-import { useContextSelector } from 'use-context-selector'
-import { BlogContext } from '../../context/BlogContext'
-
-import { useNavigate, useParams } from 'react-router-dom'
-
-import rehypeRaw from 'rehype-raw'
-import remarkGfm from 'remark-gfm'
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
-import { materialDark } from 'react-syntax-highlighter/dist/esm/styles/prism'
-
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faGithub } from '@fortawesome/free-brands-svg-icons'
-import {
-	faArrowUpRightFromSquare,
-	faCalendar,
-	faChevronLeft,
-	faComment,
-} from '@fortawesome/free-solid-svg-icons'
-import { format, formatDistanceToNowStrict } from 'date-fns'
-import { ptBR } from 'date-fns/locale'
-import toast from 'react-hot-toast'
 
 export function PostPage() {
 	const [post, setPost] = useState({} as Post)

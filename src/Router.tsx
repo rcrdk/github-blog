@@ -1,10 +1,9 @@
-import { Routes, Route } from 'react-router-dom'
+import { Route, Routes } from 'react-router-dom'
 
 import { DefaultLayout } from './layouts/DefaultLayout'
-
 import { Blog } from './pages/Blog'
-import { PostPage } from './pages/Post'
 import { NotFound } from './pages/NotFound'
+import { PostPage } from './pages/Post'
 
 export function Router() {
 	return (

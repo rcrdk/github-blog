@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react'
+import { useContextSelector } from 'use-context-selector'
+
+import { BlogContext } from '../../context/BlogContext'
 import { FormFilter } from './components/FormFilter'
 import { PostItem } from './components/Post'
 import { UserCard } from './components/User'
 import { PostsEmpty, PostsListContainer, PostsPagination } from './styles'
-import { useContextSelector } from 'use-context-selector'
-import { BlogContext } from '../../context/BlogContext'
 
 export function Blog() {
 	const [nextPage, setNextPage] = useState(2)

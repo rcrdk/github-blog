@@ -33,6 +33,10 @@ This project was developed based on a Figma design provied by the school. The ma
 ## ⚙️ Enviroment Variables
 
 ```shell
-REACT_APP_GITHUB_USER=<USERNAME>
-REACT_APP_GITHUB_REPO=<REPO>
+VITE_API_URL="https://api.github.com"
+VITE_API_VERSION="2022-11-28"
+VITE_API_ENABLE_DELAY=true
+
+VITE_GITHUB_USER=<USERNAME>
+VITE_GITHUB_REPO=<REPO>
 ```

@@ -1,9 +1,12 @@
 import { ReactNode, useCallback, useState } from 'react'
-import { createContext } from 'use-context-selector'
-import { API } from '../lib/axios'
-import { User } from '../dtos/user'
-import { Post } from '../dtos/post'
 import toast from 'react-hot-toast'
+import { createContext } from 'use-context-selector'
+
+import { env } from '@/env'
+
+import { Post } from '../dtos/post'
+import { User } from '../dtos/user'
+import { API } from '../lib/axios'
 
 interface BlogContextType {
 	user: User
@@ -36,9 +39,7 @@ export function BlogProvider({ children }: BlogProviderProps) {
 	const [loadingPosts, setLoadingPosts] = useState(true)
 
 	const fetchUser = useCallback(async () => {
-		const response = await API.get(
-			`/users/${process.env.REACT_APP_GITHUB_USER}`,
-		)
+		const response = await API.get(`/users/${env.VITE_GITHUB_USER}`)
 
 		setUser(response.data)
 	}, [])
@@ -48,7 +49,7 @@ export function BlogProvider({ children }: BlogProviderProps) {
 
 		await API.get('/search/issues', {
 			params: {
-				q: `${query || ''} repo:${process.env.REACT_APP_GITHUB_USER}/${process.env.REACT_APP_GITHUB_REPO}`,
+				q: `${query || ''} repo:${env.VITE_GITHUB_USER}/${env.VITE_GITHUB_REPO}`,
 				per_page: 6,
 				page,
 			},
@@ -84,7 +85,7 @@ export function BlogProvider({ children }: BlogProviderProps) {
 
 	const fetchPost = useCallback(async (id: number | string) => {
 		const response = await API.get(
-			`/repos/${process.env.REACT_APP_GITHUB_USER}/${process.env.REACT_APP_GITHUB_REPO}/issues/${id}`,
+			`/repos/${env.VITE_GITHUB_USER}/${env.VITE_GITHUB_REPO}/issues/${id}`,
 		)
 
 		return response.data

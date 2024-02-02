@@ -1,3 +1,4 @@
+import brandImage from '../../assets/brand.svg'
 import {
 	HeaderBgCard,
 	HeaderBgCircleLeft,
@@ -6,8 +7,6 @@ import {
 	HeaderBgLineRight,
 	HeaderContainer,
 } from './styles'
-
-import brandImage from '../../assets/brand.svg'
 
 export function Header() {
 	return (

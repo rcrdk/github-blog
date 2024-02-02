@@ -1,13 +1,12 @@
-import { useContextSelector } from 'use-context-selector'
-
-import { FormFilterContainer } from './styles'
-import { BlogContext } from '../../../../context/BlogContext'
-
-import { useForm } from 'react-hook-form'
-import * as z from 'zod'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircleNotch } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useForm } from 'react-hook-form'
+import { useContextSelector } from 'use-context-selector'
+import * as z from 'zod'
+
+import { BlogContext } from '../../../../context/BlogContext'
+import { FormFilterContainer } from './styles'
 
 const searchFormSchema = z.object({
 	query: z.string(),
